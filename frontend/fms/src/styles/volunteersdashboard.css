@@ -1,0 +1,129 @@
+/* src/views/VolunteerDashboard.css */
+
+.container-volundash {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 70px;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #667eea 0%, #4b286d 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
+    gap: 20px;
+    opacity: 0.8;
+}
+
+.title-volundash {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    user-select: text;
+    color: black;
+}
+
+.welcome-text-volundash {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    user-select: text;
+}
+
+.section-title-volundash {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 8px;
+    width: 100%;
+    text-align: left;
+    user-select: text;
+}
+
+.task-list-volundash {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-item-volundash {
+    background-color: rgba(2, 4, 73, 0.318);
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(24, 90, 157, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+.task-item-volundash:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(24, 90, 157, 0.75);
+}
+
+.task-field-volundash {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.no-tasks-volundash {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    width: 100%;
+    user-select: text;
+}
+
+/* Scrollbar styling */
+.task-list-volundash::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-list-volundash::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.task-list-volundash::-webkit-scrollbar-thumb {
+    background: #185a9d;
+    border-radius: 8px;
+}
+
+.task-list-volundash::-webkit-scrollbar-thumb:hover {
+    background: #43cea2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container-volundash {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .title-volundash {
+        font-size: 2.25rem;
+    }
+
+    .section-title-volundash {
+        font-size: 1.6rem;
+    }
+
+    .task-item-volundash {
+        padding: 15px 20px;
+    }
+
+    .task-field-volundash {
+        font-size: 0.95rem;
+    }
+}
