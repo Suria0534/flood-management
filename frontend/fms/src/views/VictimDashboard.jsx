@@ -23,7 +23,7 @@ function VictimDashboard() {
                 email,
                 ...requestData,
             });
-            alert('Help request posted successfully!');
+            // alert('Help request posted successfully!');
             setRequestData({ needType: '', description: '' });
         } catch (err) {
             alert('Failed to post help request');

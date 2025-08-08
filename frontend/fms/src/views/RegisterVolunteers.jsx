@@ -19,7 +19,7 @@ function RegisterVolunteer() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/register/volunteer', form);
-            alert('Volunteer registered successfully');
+            // alert('Volunteer registered successfully');
             navigate("/dashboard/volunteer", { state: { email: form.email } });
         } catch (err) {
             alert('Registration failed');

@@ -20,7 +20,7 @@ function RegisterNGO() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/register/ngo', form);
-            alert('NGO registered successfully');
+            // alert('NGO registered successfully');
             navigate("/dashboard/ngo", { state: { email: form.email } });
         } catch (err) {
             alert('Registration failed');

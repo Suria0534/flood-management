@@ -19,7 +19,7 @@ function RegisterOfficial() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/register/official', form);
-            alert('Official registered successfully');
+            // alert('Official registered successfully');
             navigate("/dashboard/official", { state: { email: form.email } });
         } catch (err) {
             alert('Registration failed');

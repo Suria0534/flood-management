@@ -19,7 +19,7 @@ function RegisterVictim() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/register/victim', form);
-            alert('Victim registered successfully');
+            // alert('Victim registered successfully');
             navigate("/dashboard/victim", { state: { email: form.email } });
         } catch (err) {
             alert('Registration failed');

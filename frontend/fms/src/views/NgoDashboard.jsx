@@ -38,7 +38,7 @@ function NGODashboard() {
                 assignedBy: ngoEmail,
             })
             .then((res) => {
-                alert("Task assigned successfully!");
+                // alert("Task assigned successfully!");
                 setSelectedVolunteer("");
                 setSelectedTask("");
             })
