@@ -1,0 +1,55 @@
+/* Resource Section Container */
+.resource-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  min-height: 100vh; /* full viewport height */
+  background: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  backdrop-filter: blur(8px); /* blur effect */
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Form Inputs and Button */
+.resource-form input, .resource-form button {
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Button hover effect */
+.resource-form button {
+  cursor: pointer;
+  background: #6b5b95;
+  color: white;
+}
+
+.resource-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* Table Styling */
+.resource-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.resource-table th, .resource-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.resource-table th {
+  background: rgba(255,255,255,0.2);
+}

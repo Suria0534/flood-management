@@ -1,87 +1,190 @@
-/* src/views/HomePage.css */
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 70px;
-    min-height: 80vh;
-    background: linear-gradient(135deg, #667eea 0%, #4b286d 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    border-radius: 12px;
-    max-width: 500px;
-    margin: 40px auto;
-    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
-    gap: 20px;
-    opacity: 0.8;
+/* src/styles/homepage.css */
+.homepage {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-.title {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 0;
-    color: black;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+/* Transparent Hero Section */
+.hero, .need-help-card, .resources-hero-card, .hero-buttons button, .admin-btn, .feature-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  margin-bottom: 80px;
 }
 
-.subtitle {
-    font-size: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: rgb(50, 50, 50);
-    font-weight: 500;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  min-height: 50vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 320px;
+.hero h1 { font-size: 2.8rem; margin-bottom: 15px; }
+.hero p { font-size: 1.2rem; margin-bottom: 25px; }
+
+/* Hero Buttons & Admin Button */
+.hero-buttons, .admin-login { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+
+.hero-buttons button, .admin-btn {
+  color:white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #6b5b95;
 }
 
-.button {
-    padding: 14px 20px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: #fff;
-    color: #000DFF;
-    font-weight: 600;
-    box-shadow: 0 4px 8px rgba(0, 13, 255, 0.3);
-    user-select: none;
+.hero-buttons button:hover, .admin-btn:hover {
+  transform: translateY(-3px);
+  background: #6b5b95;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
 }
 
-.button:hover {
-    background-color: #74ffce;
-    color: #000;
-    box-shadow: 0 6px 15px rgba(0, 13, 255, 0.7);
-    transform: translateY(-3px);
+/* Login Link */
+.login-link { margin-top: 20px; font-size: 1rem; }
+.login-link span { color: #ffdd57; cursor: pointer; text-decoration: underline; }
+.login-link span:hover { color: #fff; }
+
+/* Need Help Section */
+.need-help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full viewport height */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  margin-bottom: 80px;
 }
 
-.login-button {
-    margin-top: 40px;
-    width: 150px;
-    padding: 12px 0;
-    background-color: transparent;
-    border: 2px solid #2f006d;
-    color: #001d91;
-    font-weight: 600;
-    border-radius: 30px;
-    transition: all 0.4s ease;
-    cursor: pointer;
-    align-self: center;
-    user-select: none;
+.need-help-card {
+  text-align: center;
+  padding: 60px 40px;
+  animation: float 2.5s infinite ease-in-out;
+  max-width: 400px;
+  width: 90%;
 }
 
-.login-button:hover {
-    background-color: #6affb9;
-    color: rgb(0, 0, 0);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.7);
-    border: none;
-    transform: scale(1.05);
+.need-help-icon { 
+  font-size: 80px; 
+  display: block; 
+  margin-bottom: 25px; 
+  animation: pulse 1.2s infinite; 
 }
+
+.need-help h2 { 
+  font-size: 42px; 
+  margin-bottom: 15px; 
+  color:white; 
+}
+
+.login-text span { 
+  color: #0b61a4; 
+  text-decoration: underline; 
+  cursor: pointer; 
+}
+
+/* Resource Section - full page middle like Need Help */
+.resources-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ekdom full viewport height */
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+}
+
+.resources-hero-card {
+  text-align: center;
+  padding: 60px 40px;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: float 2.5s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.resources-hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+.resources-hero-icon {
+  font-size: 80px;
+  display: block;
+  margin-bottom: 25px;
+  animation: pulse 1.2s infinite;
+}
+
+.resources-hero h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+  color: #1a3d6c;
+}
+
+.resources-hero p {
+  font-size: 1.2rem;
+  color: #0b61a4;
+}
+
+/* Resource Form */
+.resource-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.resource-form input {
+  flex: 1 1 150px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.resource-form button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #6b5b95;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.resource-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+
+
+/* Features Section */
+.features { padding: 60px 20px; text-align: center; }
+.features h2 { font-size: 2rem; margin-bottom: 40px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 25px; }
+.feature-card { padding: 25px 15px; cursor: pointer; }
+.feature-card:hover { transform: translateY(-5px); }
+
+/* Animations */
+@keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.25);}100%{transform:scale(1);} }
+@keyframes float { 0%,100%{transform:translateY(0px);}50%{transform:translateY(-15px);} }
+
+/* Footer */
+footer { text-align: center; padding: 20px 10px; background-color: #4b286d; color: #fff; }

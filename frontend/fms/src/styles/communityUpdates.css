@@ -1,0 +1,33 @@
+.community-updates {
+  margin-top: 40px;
+}
+
+.update-form textarea,
+.update-form input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.update-form button {
+  padding: 8px 16px;
+  margin-top: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-feed {
+  margin-top: 20px;
+}
+
+.update-card {
+  background-color: #f1f7fb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}

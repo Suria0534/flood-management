@@ -1,127 +1,161 @@
-/* src/views/VictimDashboard.css */
+/* src/styles/victimdashboard.css */
 
-.container-victdash {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 70px;
-    min-height: 80vh;
-    background: linear-gradient(135deg, #667eea 0%, #4b286d 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    border-radius: 12px;
-    max-width: 500px;
-    margin: 40px auto;
-    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
-    gap: 20px;
-    opacity: 0.8;
+/* Background & Container */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url("/background.jpeg") no-repeat center center fixed;
+    background-size: cover;
 }
 
+.container-victdash {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(245, 240, 255, 0.9); /* light violet background */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Title */
 .title-victdash {
-    font-size: 2.75rem;
-    font-weight: 800;
-    margin: 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
     text-align: center;
-    user-select: text;
-    color: black;
+    color: hwb(274 2% 82%); /* dark violet */
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
 .welcome-text-victdash {
+    text-align: center;
+    color: #4b0082; /* dark violet */
+    margin-bottom: 30px;
     font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0;
-    user-select: text;
 }
 
+/* Content Layout */
 .content-victdash {
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    justify-content: center;
     flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
 }
 
-.form-box-victdash {
-    flex: 1 1 350px;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 24px 30px;
-    box-shadow: 0 5px 15px rgba(12, 5, 6, 0.3);
-    backdrop-filter: blur(8px);
+/* Boxes */
+.form-box-victdash,
+.sos-box-victdash,
+.donation-box-victdash,
+.donation-history-box-victdash,
+.updates-section-victdash {
+    flex: 1 1 45%;
+    background-color: #f0e6ff; /* very light violet */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    color: #4b0082; /* dark violet text */
 }
 
-.form-box-victdash h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-weight: 700;
-    user-select: text;
-}
-
-label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    user-select: text;
-}
-
-select,
-textarea {
-    width: 90%;
-    padding: 12px 14px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    font-family: inherit;
-    outline: none;
-    resize: none;
-    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-    user-select: text;
-    color: #222;
-}
-
-select:focus,
-textarea:focus {
-    box-shadow: 0 0 12px 3px #ff6a88;
-    background-color: #ffe5ea;
-    color: #333;
-}
-
-button {
-    margin-top: 20px;
+/* Form Styling */
+.form-box-victdash select,
+.form-box-victdash textarea,
+.updates-section-victdash textarea,
+.updates-section-victdash input[type="file"] {
     width: 100%;
-    padding: 14px 0;
-    background-color: #fff;
-    color: #ff6a88;
-    font-weight: 700;
-    font-size: 1.2rem;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #d0c4f7;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+/* Buttons */
+.form-box-victdash button,
+.donation-box-victdash button,
+.updates-section-victdash button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #b19cd9; /* light violet */
+    color: #4b0082; /* dark violet text */
     border: none;
-    border-radius: 12px;
+    border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(22, 11, 13, 0.5);
-    transition: all 0.35s ease;
-    user-select: none;
-    letter-spacing: 1px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-button:hover {
-    background-color: #ff6a88;
-    color: #fff;
-    box-shadow: 0 9px 30px rgba(255, 106, 136, 0.85);
-    transform: translateY(-4px);
+.form-box-victdash button:hover,
+.donation-box-victdash button:hover,
+.updates-section-victdash button:hover {
+    background-color: #9b88c2; /* darker shade on hover */
+    color: #4b0082; /* text remains dark violet */
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
+/* Donation History */
+.donation-history-box-victdash ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.donation-history-box-victdash li {
+    padding: 8px 0;
+    border-bottom: 1px solid #dcd0f5;
+}
+
+/* Community Updates */
+.updates-feed {
+    margin-top: 15px;
+}
+
+.update-card {
+    background-color: #e6e0ff; /* light violet card */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #4b0082; /* dark violet text */
+}
+
+.update-card img,
+.update-card video {
+    margin-top: 8px;
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+/* Modal Styling */
+.modal {
+    background-color: #fff0ff; /* very light violet */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+    color: #4b0082; /* dark violet text */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
     .content-victdash {
         flex-direction: column;
-        gap: 25px;
     }
 
-    .form-box-victdash {
+    .form-box-victdash,
+    .sos-box-victdash,
+    .donation-box-victdash,
+    .donation-history-box-victdash,
+    .updates-section-victdash {
         flex: 1 1 100%;
-        padding: 20px;
     }
 }

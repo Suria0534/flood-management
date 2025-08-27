@@ -1,8 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const volunteerController = require("../controllers/VolunteerController");
+const volunteerController = require("../controllers/volunteerController");
 
-router.get("/volunteers", volunteerController.getAllVolunteers);
-router.post("/volunteer-task", volunteerController.assignTask);
-router.get("/volunteer-tasks/:email", volunteerController.getTasksByEmail);
+// Register new volunteer
+router.post("/register", volunteerController.registerVolunteer);
+
+// Get all volunteers (only email)
+router.get("/", volunteerController.getAllVolunteers);
+
+// Assign task
+router.post("/assign", volunteerController.assignTask);
+
+// Get tasks by volunteer email
+router.get("/tasks/:email", volunteerController.getTasksByEmail);
+
 module.exports = router;
