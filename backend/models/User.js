@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+// models/User.js
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  role: { type: String, enum: ['victim', 'volunteer', 'ngo', 'official'], required: true },
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  role: { type: String, enum: ["victim","volunteer","ngo","official"], required: true },
-  password: { type: String, required: true },
-}, { timestamps: true });
+  lat: { type: Number, required: true },  // Latitude
+  lon: { type: Number, required: true },  // Longitude
+});
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

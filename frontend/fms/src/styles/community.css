@@ -1,0 +1,133 @@
+.community-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background: url('/path/to/your/background.jpg') no-repeat center center fixed;
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.community-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.update-form {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.update-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  resize: vertical;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.update-form input[type="file"] {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.update-form button {
+  background: rgba(255,255,255,0.25);
+  color: #1a3d6c;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.update-form button:hover {
+  background: rgba(255,255,255,0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.newsfeed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.update-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  width: 400px;
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.update-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.update-author {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.update-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.media-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.update-media {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.update-time {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .update-card {
+    width: 100%;
+  }
+  .update-media {
+    max-height: 300px;
+  }
+}

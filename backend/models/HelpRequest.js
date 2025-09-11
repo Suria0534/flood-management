@@ -12,3 +12,4 @@ const helpRequestSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("HelpRequest", helpRequestSchema);
+

@@ -1,124 +1,255 @@
-// src/views/RegisterVictim.jsx
+
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// import '../styles/registervictim.css';
+
+// function RegisterVictim() {
+//     // Form state
+//     const [form, setForm] = useState({
+//         name: '',
+//         email: '',
+//         phone: '',
+//         age: '',
+//         location: '',
+//         needs: ''
+//     });
+
+//     // Error & success messages
+//     const [error, setError] = useState(null);
+//     const [success, setSuccess] = useState(null);
+
+//     const navigate = useNavigate();
+
+//     // Handle input changes
+//     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+//     // Handle form submission
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         setError(null);
+//         setSuccess(null);
+
+//         // Validate required fields
+//         if (!form.name || !form.email || !form.phone || !form.age || !form.location) {
+//             setError('All fields except "Needs" are required!');
+//             return;
+//         }
+
+//         // Validate age
+//         const ageNum = parseInt(form.age);
+//         if (isNaN(ageNum) || ageNum <= 0) {
+//             setError('Age must be a valid number greater than 0');
+//             return;
+//         }
+
+//         try {
+//             // Send registration data to backend
+//             const response = await axios.post('http://localhost:5000/api/register/victim', form);
+
+//             if (response.status === 200) {
+//                 setSuccess('Victim registered successfully!');
+
+//                 // Navigate to dashboard with victimId + email
+//                 const victimData = response.data; // backend থেকে আসা নতুন victim object
+//                 navigate("/dashboard/victim", { state: { 
+//                     email: victimData.email, 
+//                     victimId: victimData._id 
+//                 } });
+//             } else {
+//                 setError(response.data.message || 'Registration failed. Please try again.');
+//             }
+//         } catch (err) {
+//             setError(err.response?.data?.message || 'Registration failed. Please try again.');
+//         }
+//     };
+
+//     return (
+//         <form onSubmit={handleSubmit} className="container-regvic" noValidate>
+//             <h2 className="title-regvic">Victim Registration</h2>
+
+//             {error && <p className="error-message">{error}</p>}
+//             {success && <p className="success-message">{success}</p>}
+
+//             <input
+//                 name="name"
+//                 placeholder="Full Name"
+//                 value={form.name}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//                 required
+//             />
+
+//             <input
+//                 name="email"
+//                 type="email"
+//                 placeholder="Email"
+//                 value={form.email}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//                 required
+//             />
+
+//             <input
+//                 name="phone"
+//                 type="tel"
+//                 placeholder="Phone Number"
+//                 value={form.phone}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//                 required
+//             />
+
+//             <input
+//                 name="age"
+//                 type="number"
+//                 placeholder="Age"
+//                 value={form.age}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//                 required
+//                 min="1"
+//             />
+
+//             <input
+//                 name="location"
+//                 placeholder="Location"
+//                 value={form.location}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//                 required
+//             />
+
+//             <input
+//                 name="needs"
+//                 placeholder="Needs (optional)"
+//                 value={form.needs}
+//                 onChange={handleChange}
+//                 className="input-regvic"
+//             />
+
+//             <button type="submit" className="button-regvic">Register</button>
+//         </form>
+//     );
+// }
+
+// export default RegisterVictim;
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/registervictim.css'; // Ensure to add proper CSS
+import '../styles/registervictim.css';
 
-function RegisterVictim() {
-    // State to handle form data
-    const [form, setForm] = useState({
-        name: '',
-        email: '',
-        age: '',
-        location: '',
-        needs: ''
-    });
+const RegisterVictim = () => {
+  // Form state
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    location: '',
+    needs: '',
+    password: '' // added password
+  });
 
-    // State to handle error and success messages
-    const [error, setError] = useState(null);  // For error messages
-    const [success, setSuccess] = useState(null); // For success messages
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  // Handle input changes
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    // Handle input change for all form fields
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
 
-    // Handle form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);  // Clear previous errors
-        setSuccess(null);  // Clear previous success messages
+    // Validate required fields
+    if (!form.name || !form.email || !form.phone || !form.location || !form.password) {
+      setError('All fields except "Needs" are required!');
+      return;
+    }
 
-        // Basic validation for required fields
-        if (!form.name || !form.email || !form.age || !form.location) {
-            setError('All fields are required!');
-            return;
-        }
+    try {
+      const response = await axios.post('http://localhost:5000/api/register/victim', form);
 
-        // Check if age is a valid number
-        if (parseInt(form.age) <= 0) {
-            setError('Age must be greater than 0');
-            return;
-        }
+      if (response.status === 200) {
+        setSuccess('Victim registered successfully!');
+        const victimData = response.data;
+        navigate("/dashboard/victim", { state: { email: victimData.email, victimId: victimData._id } });
+      } else {
+        setError(response.data.message || 'Registration failed. Please try again.');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    }
+  };
 
-        try {
-            // Send form data to backend API
-            const response = await axios.post('http://localhost:5000/api/register/victim', form);
+  return (
+    <form onSubmit={handleSubmit} className="container-regvic" noValidate>
+      <h2 className="title-regvic">Victim Registration</h2>
 
-            // If registration is successful, show success message and navigate
-            if (response.status === 200) {
-                setSuccess('Victim registered successfully!');
-                navigate("/dashboard/victim", { state: { email: form.email } });
-            } else {
-                // If the response status isn't 200, set error message
-                setError(response.data.message || 'Registration failed. Please try again.');
-            }
-        } catch (err) {
-            // Handle any errors from the backend
-            setError(err.response?.data?.message || 'Registration failed. Please try again.');
-        }
-    };
+      {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
 
-    return (
-        <form onSubmit={handleSubmit} className="container-regvic" noValidate>
-            <h2 className="title-regvic">Victim Registration</h2>
+      <input
+        name="name"
+        placeholder="Full Name"
+        value={form.name}
+        onChange={handleChange}
+        className="input-regvic"
+        required
+      />
 
-            {/* Show error message if any */}
-            {error && <p className="error-message">{error}</p>}
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+        className="input-regvic"
+        required
+      />
 
-            {/* Show success message if registration is successful */}
-            {success && <p className="success-message">{success}</p>}
+      <input
+        name="phone"
+        type="tel"
+        placeholder="Phone Number"
+        value={form.phone}
+        onChange={handleChange}
+        className="input-regvic"
+        required
+      />
 
-            <input
-                name="name"
-                placeholder="Name"
-                onChange={handleChange}
-                value={form.name}
-                className="input-regvic"
-                required
-            />
+      <input
+        name="location"
+        placeholder="Location"
+        value={form.location}
+        onChange={handleChange}
+        className="input-regvic"
+        required
+      />
 
-            <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                onChange={handleChange}
-                value={form.email}
-                className="input-regvic"
-                required
-            />
+      <input
+        name="needs"
+        placeholder="Needs (optional)"
+        value={form.needs}
+        onChange={handleChange}
+        className="input-regvic"
+      />
 
-            <input
-                name="age"
-                type="number"
-                placeholder="Age"
-                onChange={handleChange}
-                value={form.age}
-                className="input-regvic"
-                required
-                min="0"
-            />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        className="input-regvic"
+        required
+      />
 
-            <input
-                name="location"
-                placeholder="Location"
-                onChange={handleChange}
-                value={form.location}
-                className="input-regvic"
-                required
-            />
-
-            <input
-                name="needs"
-                placeholder="Needs (optional)"
-                onChange={handleChange}
-                value={form.needs}
-                className="input-regvic"
-            />
-
-            <button type="submit" className="button-regvic">Register</button>
-        </form>
-    );
-}
+      <button type="submit" className="button-regvic">Register</button>
+    </form>
+  );
+};
 
 export default RegisterVictim;

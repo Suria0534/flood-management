@@ -1,0 +1,71 @@
+/* Container */
+.shelter-search-container {
+  padding: 40px;
+  min-height: 100vh;
+  background: rgba(240, 248, 255, 0.7);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+/* Title */
+.shelter-search-container h2 {
+  font-size: 34px;
+  color: #1a3d6c;
+  margin-bottom: 25px;
+}
+
+/* Search box */
+.shelter-search-container input[type="text"] {
+  width: 60%;
+  max-width: 500px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 25px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.shelter-search-container input[type="text"]:focus {
+  border-color: #1a3d6c;
+  box-shadow: 0 0 8px rgba(26, 61, 108, 0.4);
+}
+
+/* Shelter List */
+.shelter-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* Shelter Card */
+.shelter-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 25px;
+  text-align: left;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.shelter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Shelter Card Text */
+.shelter-card strong {
+  font-size: 20px;
+  color: #0b3164;
+}
+
+.shelter-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #333;
+}

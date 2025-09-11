@@ -1,173 +1,855 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import SOSButton from '../views/SOSButton';
+
+
+// // VictimDashboard.jsx
+// import React, { useState, useEffect } from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import SOSButton from "../views/SOSButton";
+// import Modal from "react-modal";
+// import HelpRequest from "../views/HelpRequest";
+// import CommunityUpdates from "../views/CommunityUpdates";
+// import CommunityChat from "../views/CommunityChat";
+// import "../styles/victimdashboard.css";
+
+// Modal.setAppElement("#root");
+
+// function VictimDashboard() {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   // Email from login state
+//   const emailFromState = location.state?.email || "";
+
+//   // Profile state
+//   const [profile, setProfile] = useState(null);
+//   const [loadingProfile, setLoadingProfile] = useState(true);
+
+//   // Shelters
+//   const [shelters, setShelters] = useState([]);
+//   const [searchTerm, setSearchTerm] = useState("");
+
+//   // Matched volunteers/resources
+//   const [matches, setMatches] = useState([]);
+
+//   // Community updates
+//   const [modalOpen, setModalOpen] = useState(false);
+//   const [text, setText] = useState("");
+//   const [file, setFile] = useState(null);
+//   const [updates, setUpdates] = useState([]);
+
+//   // Announcements & weather
+//   const [announcements, setAnnouncements] = useState([]);
+//   const [weather, setWeather] = useState(null);
+
+//   // -----------------------------
+//   // Fetch profile by email
+//   // -----------------------------
+//   useEffect(() => {
+//     if (!emailFromState) return;
+
+//     const fetchProfile = async () => {
+//       try {
+//         console.log("Fetching profile for:", emailFromState);
+//         const res = await axios.get(
+//           `http://localhost:5000/api/victim/email/${emailFromState.trim()}`
+//         );
+
+//         if (res.data) {
+//           setProfile(res.data);
+//         } else {
+//           console.warn("No profile returned from backend");
+//         }
+//       } catch (err) {
+//         console.error("Error fetching profile:", err.response?.data || err.message);
+//       } finally {
+//         setLoadingProfile(false);
+//       }
+//     };
+
+//     fetchProfile();
+//   }, [emailFromState]);
+
+//   // -----------------------------
+//   // Fetch shelters
+//   // -----------------------------
+//   useEffect(() => {
+//     const fetchShelters = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:5000/api/shelters");
+//         setShelters(res.data || []);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchShelters();
+//   }, []);
+
+//   // -----------------------------
+//   // Fetch community updates
+//   // -----------------------------
+//   useEffect(() => {
+//     const fetchUpdates = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:5000/api/updates");
+//         setUpdates(res.data.updates || []);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchUpdates();
+//   }, []);
+
+//   // -----------------------------
+//   // Fetch announcements & weather
+//   // -----------------------------
+//   useEffect(() => {
+//     const fetchAnnouncementsWeather = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:5000/api/announcements");
+//         setAnnouncements(res.data.news || []);
+//         setWeather(res.data.weather || null);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchAnnouncementsWeather();
+//   }, []);
+
+//   // -----------------------------
+//   // Fetch matched volunteers/resources
+//   // -----------------------------
+//   useEffect(() => {
+//     if (!profile) return;
+
+//     const fetchMatches = async () => {
+//       try {
+//         // Use email to fetch matched volunteers
+//         const res = await axios.get(
+//           `http://localhost:5000/api/matching/email/${profile.email}`
+//         );
+//         setMatches(res.data.matchedVolunteers || []);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+
+//     fetchMatches();
+//   }, [profile]);
+
+//   // Filter shelters by search term
+//   const filteredShelters = shelters.filter(
+//     (s) =>
+//       s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//       s.location.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   // -----------------------------
+//   // Handle posting community update
+//   // -----------------------------
+//   const handleSubmitUpdate = async (e) => {
+//     e.preventDefault();
+//     if (!profile) return;
+
+//     try {
+//       const formData = new FormData();
+//       formData.append("author", profile.name);
+//       formData.append("text", text);
+//       if (file) formData.append("media", file);
+
+//       await axios.post("http://localhost:5000/api/updates", formData, {
+//         headers: { "Content-Type": "multipart/form-data" },
+//       });
+
+//       setText("");
+//       setFile(null);
+//       setModalOpen(false);
+
+//       const res = await axios.get("http://localhost:5000/api/updates");
+//       setUpdates(res.data.updates || []);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   const emergencyNumbers = ["+8801840268794", "+8801531982970", "+8801580602149"];
+
+//   if (loadingProfile) return <p>Loading profile...</p>;
+//   if (!profile) return <p>Profile not found!</p>;
+
+//   return (
+//     <div className="container-victdash">
+//       {/* Profile & Logout */}
+//       <div className="profile-corner">
+//             <img src={profile.profilePic || "/default-profile.png"} alt="Profile" />
+//             <div className="profile-info">
+//               <p><strong>{profile.name}</strong></p>
+//               <p>Email: {profile.email}</p>
+//               <p>Phone: {profile.phone}</p>
+//               <p>Location: {profile.location}</p>
+
+//               {/* Profile picture update */}
+//               <input
+//                 type="file"
+//                 accept="image/*"
+//                 onChange={(e) => setProfilePicFile(e.target.files[0])}
+//               />
+//               {profilePicFile && (
+//                 <button onClick={async () => {
+//                   if (!profile || !profilePicFile) return;
+//                   try {
+//                     const formData = new FormData();
+//                     formData.append("profilePic", profilePicFile);
+//                     const res = await axios.put(
+//                       `http://localhost:5000/api/victim/profile-pic/${profile._id}`,
+//                       formData,
+//                       { headers: { "Content-Type": "multipart/form-data" } }
+//                     );
+//                     setProfile(res.data); // update profile with new picture
+//                     setProfilePicFile(null);
+//                   } catch (err) {
+//                     console.error("Profile picture update failed:", err.response?.data || err.message);
+//                   }
+//                 }}>Upload Profile Picture</button>
+//               )}
+//     </div>
+
+//     <button onClick={() => navigate("/login")}>Logout</button>
+//   </div>
+
+//       <div className="dashboard-content">
+//         <h2>Victim Dashboard</h2>
+
+//         {/* Emergency Section */}
+//         <div className="glass-section">
+//           <h3>Emergency SOS</h3>
+//           <SOSButton numbers={emergencyNumbers} />
+//           <HelpRequest email={profile.email} />
+//         </div>
+
+//         {/* Community Chat */}
+//         <div className="glass-section">
+//           <h2>Community Chat</h2>
+//           <CommunityChat
+//             userName={profile.name}
+//             userEmail={profile.email}
+//             userPhone={profile.phone}
+//             userLocation={profile.location}
+//           />
+//         </div>
+
+//         {/* Matched Volunteers/Resources */}
+//         {/* <div className="glass-section">
+//           <h2>Matched Volunteers/Resources</h2>
+//           {matches.length === 0 ? (
+//             <p>No matches found in your area.</p>
+//           ) : (
+//             <ul>
+//               {matches.map((v) => (
+//                 <li key={v._id}>
+//                   <p><strong>{v.name}</strong></p>
+//                   <p>Location: {v.location}</p>
+//                   <p>Skills: {v.skills || "N/A"}</p>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div> */}
+
+//         {/* Shelters */}
+//         <div className="glass-section">
+//           <h2>Nearby Shelters</h2>
+//           <input
+//             type="text"
+//             placeholder="Search shelters by name or location..."
+//             value={searchTerm}
+//             onChange={(e) => setSearchTerm(e.target.value)}
+//           />
+//           {filteredShelters.length === 0 ? (
+//             <p>No shelters found.</p>
+//           ) : (
+//             <ul>
+//               {filteredShelters.map((s) => (
+//                 <li key={s._id}>
+//                   <p><strong>{s.name}</strong></p>
+//                   <p>Location: {s.location}</p>
+//                   <p>Capacity: {s.totalCapacity}, Current Occupancy: {s.currentOccupancy}</p>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         {/* Announcements & Weather */}
+//         <div className="glass-section">
+//           <h2>Important Announcements & Weather</h2>
+//           <div className="announcements">
+//             {announcements.length === 0 ? (
+//               <p>No announcements yet.</p>
+//             ) : (
+//               announcements.map((n) => (
+//                 <div key={n._id} className="announcement-item">
+//                   <strong>{n.title}</strong>
+//                   <p>{n.description}</p>
+//                 </div>
+//               ))
+//             )}
+//           </div>
+//           {weather && (
+//             <div className="weather-box">
+//               <h4>Weather Update</h4>
+//               <p>City: {weather.location}</p>
+//               <p>Temperature: {weather.temperature}°C</p>
+//               <p>Condition: {weather.condition}</p>
+//               <p>Wind Speed: {weather.windSpeed} m/s</p>
+//               <p>Rain Forecast: {weather.rainForecast} mm</p>
+//               <p>Alert: {weather.alert || "None"}</p>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* Community Updates */}
+//         <div className="glass-section">
+//           <CommunityUpdates user={{ name: profile.name, token: "demoToken" }} />
+//         </div>
+//       </div>
+
+//       {/* Modal for posting update */}
+//       <Modal
+//         isOpen={modalOpen}
+//         onRequestClose={() => setModalOpen(false)}
+//         className="modal"
+//         overlayClassName="overlay"
+//       >
+//         <h2>Share Update</h2>
+//         <form onSubmit={handleSubmitUpdate}>
+//           <textarea
+//             placeholder="Write something..."
+//             value={text}
+//             onChange={(e) => setText(e.target.value)}
+//             required
+//           />
+//           <input
+//             type="file"
+//             accept="image/*,video/*"
+//             onChange={(e) => setFile(e.target.files[0])}
+//           />
+//           <button type="submit">Post</button>
+//           <button type="button" onClick={() => setModalOpen(false)}>Close</button>
+//         </form>
+//       </Modal>
+//     </div>
+//   );
+// }
+
+// export default VictimDashboard;
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import SOSButton from "../views/SOSButton";
+// import Modal from "react-modal";
+// import HelpRequest from "../views/HelpRequest";
+// import CommunityUpdates from "../views/CommunityUpdates";
+// import CommunityChat from "../views/CommunityChat";
+// import "../styles/victimdashboard.css";
+
+// Modal.setAppElement("#root");
+
+// function VictimDashboard() {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   // -----------------------------
+//   // Receive email and token from login
+//   // -----------------------------
+//   const emailFromState = location.state?.email || "";
+//   const tokenFromState = location.state?.token || "";
+
+//   // -----------------------------
+//   // Profile state
+//   // -----------------------------
+//   const [profile, setProfile] = useState(null);
+//   const [loadingProfile, setLoadingProfile] = useState(true);
+//   const fileInputRef = useRef();
+
+//   // -----------------------------
+//   // Shelters
+//   // -----------------------------
+//   const [shelters, setShelters] = useState([]);
+//   const [searchTerm, setSearchTerm] = useState("");
+
+//   // -----------------------------
+//   // Community updates
+//   // -----------------------------
+//   const [modalOpen, setModalOpen] = useState(false);
+//   const [text, setText] = useState("");
+//   const [file, setFile] = useState(null);
+//   const [updates, setUpdates] = useState([]);
+
+//   // -----------------------------
+//   // Announcements & weather
+//   // -----------------------------
+//   const [announcements, setAnnouncements] = useState([]);
+//   const [weather, setWeather] = useState(null);
+
+//   // -----------------------------
+//   // Fetch profile
+//   // -----------------------------
+//   useEffect(() => {
+//     if (!emailFromState) return;
+//     const fetchProfile = async () => {
+//       try {
+//         const res = await axios.get(
+//           `http://localhost:5000/api/victim/email/${emailFromState.trim()}`
+//         );
+//         if (res.data) setProfile(res.data);
+//       } catch (err) {
+//         console.error("Error fetching profile:", err.response?.data || err.message);
+//       } finally {
+//         setLoadingProfile(false);
+//       }
+//     };
+//     fetchProfile();
+//   }, [emailFromState]);
+
+//   // -----------------------------
+//   // Fetch shelters
+//   // -----------------------------
+//   useEffect(() => {
+//     const fetchShelters = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:5000/api/shelters");
+//         setShelters(res.data || []);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchShelters();
+//   }, []);
+
+//   // -----------------------------
+//   // Fetch announcements & weather
+//   // -----------------------------
+//   useEffect(() => {
+//     const fetchAnnouncementsWeather = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:5000/api/announcements");
+//         setAnnouncements(res.data.news || []);
+//         setWeather(res.data.weather || null);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchAnnouncementsWeather();
+//   }, []);
+
+//   // -----------------------------
+//   // Handle profile picture update
+//   // -----------------------------
+//   const handleProfilePicChange = async (e) => {
+//     const selectedFile = e.target.files[0];
+//     if (!selectedFile || !profile) return;
+
+//     const formData = new FormData();
+//     formData.append("profilePic", selectedFile);
+
+//     try {
+//       const res = await axios.put(
+//         `http://localhost:5000/api/victim/profile-pic/${profile._id}`,
+//         formData,
+//         { headers: { "Content-Type": "multipart/form-data" } }
+//       );
+//       setProfile(res.data); // update profile immediately
+//     } catch (err) {
+//       console.error("Profile picture update failed:", err.response?.data || err.message);
+//     }
+//   };
+
+//   // -----------------------------
+//   // Filter shelters by search term
+//   // -----------------------------
+//   const filteredShelters = shelters.filter(
+//     (s) =>
+//       s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//       s.location.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   const emergencyNumbers = ["+8801840268794", "+8801531982970", "+8801580602149"];
+
+//   if (loadingProfile) return <p>Loading profile...</p>;
+//   if (!profile) return <p>Profile not found!</p>;
+
+//   return (
+//     <div className="container-victdash">
+//       {/* Profile & Logout */}
+//       <div className="profile-corner">
+//         <img
+//           src={
+//             profile.profilePic
+//               ? `http://localhost:5000/uploads/${profile.profilePic}`
+//               : "/default-profile.png"
+//           }
+//           alt="Profile"
+//           style={{ cursor: "pointer" }}
+//           onClick={() => fileInputRef.current.click()}
+//         />
+//         <input
+//           type="file"
+//           accept="image/*"
+//           ref={fileInputRef}
+//           style={{ display: "none" }}
+//           onChange={handleProfilePicChange}
+//         />
+
+//         <div className="profile-info">
+//           <p><strong>{profile.name}</strong></p>
+//           <p>Email: {profile.email}</p>
+//           <p>Phone: {profile.phone}</p>
+//           <p>Location: {profile.location}</p>
+//           <button onClick={() => navigate("/login")}>Logout</button>
+//         </div>
+//       </div>
+
+//       <div className="dashboard-content">
+//         <h2>Victim Dashboard</h2>
+
+//         {/* Emergency Section */}
+//         <div className="glass-section">
+//           <h3>Emergency SOS</h3>
+//           <SOSButton numbers={emergencyNumbers} />
+//         </div>
+
+//         {/* Community Chat */}
+//         <div className="glass-section">
+//           <h2>Community Chat</h2>
+//           <CommunityChat
+//             userName={profile.name}
+//             userEmail={profile.email}
+//             userPhone={profile.phone}
+//             userLocation={profile.location}
+//           />
+//         </div>
+
+//         {/* Shelters */}
+//         <div className="glass-section">
+//           <h2>Nearby Shelters</h2>
+//           <input
+//             type="text"
+//             placeholder="Search shelters by name or location..."
+//             value={searchTerm}
+//             onChange={(e) => setSearchTerm(e.target.value)}
+//           />
+//           {filteredShelters.length === 0 ? (
+//             <p>No shelters found.</p>
+//           ) : (
+//             <ul>
+//               {filteredShelters.map((s) => (
+//                 <li key={s._id}>
+//                   <p><strong>{s.name}</strong></p>
+//                   <p>Location: {s.location}</p>
+//                   <p>Capacity: {s.totalCapacity}, Current Occupancy: {s.currentOccupancy}</p>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         {/* Announcements & Weather */}
+//         <div className="glass-section">
+//           <h2>Important Announcements & Weather</h2>
+//           <div className="announcements">
+//             {announcements.length === 0 ? (
+//               <p>No announcements yet.</p>
+//             ) : (
+//               announcements.map((n) => (
+//                 <div key={n._id} className="announcement-item">
+//                   <strong>{n.title}</strong>
+//                   <p>{n.description}</p>
+//                 </div>
+//               ))
+//             )}
+//           </div>
+//           {weather && (
+//             <div className="weather-box">
+//               <h4>Weather Update</h4>
+//               <p>City: {weather.location}</p>
+//               <p>Temperature: {weather.temperature}°C</p>
+//               <p>Condition: {weather.condition}</p>
+//               <p>Wind Speed: {weather.windSpeed} m/s</p>
+//               <p>Rain Forecast: {weather.rainForecast} mm</p>
+//               <p>Alert: {weather.alert || "None"}</p>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* Community Updates */}
+//         <div className="glass-section">
+//           <CommunityUpdates user={{ email: profile.email, token: tokenFromState }} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default VictimDashboard;
+
+
+
+
+
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import SOSButton from "../views/SOSButton";
 import Modal from "react-modal";
-import ShelterCard from '../views/ShelterCard';
-import HelpRequest from '../views/HelpRequest'; // ✅ Import HelpRequest
-import '../styles/victimdashboard.css';
+import HelpRequest from "../views/HelpRequest";
+import CommunityUpdates from "../views/CommunityUpdates";
+import CommunityChat from "../views/CommunityChat";
+import "../styles/victimdashboard.css";
 
 Modal.setAppElement("#root");
 
 function VictimDashboard() {
-    const location = useLocation();
-    const email = location.state?.email || 'No email provided';
-    const phone = location.state?.phone || '+8801531982970';
-    const [donationHistory, setDonationHistory] = useState([]);
-    const [updates, setUpdates] = useState([]);
-    const [text, setText] = useState("");
-    const [file, setFile] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [shelters, setShelters] = useState([]);
-    const [newShelter, setNewShelter] = useState({ name: "", location: "", capacity: 0 });
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  // -----------------------------
+  // Receive email and token from login
+  // -----------------------------
+  const emailFromState = location.state?.email || "";
+  const tokenFromState = location.state?.token || "";
 
-    // Fetch Donation History
-    useEffect(() => {
-        const fetchDonationHistory = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const res = await axios.get(`http://localhost:5000/api/donations/${email}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setDonationHistory(res.data);
-            } catch (err) { console.error(err); }
-        };
-        fetchDonationHistory();
-    }, [email]);
+  // -----------------------------
+  // Profile state
+  // -----------------------------
+  const [profile, setProfile] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const fileInputRef = useRef();
 
-    // Fetch Updates & Shelters
-    useEffect(() => { fetchUpdates(); fetchShelters(); }, []);
-    const fetchUpdates = async () => {
-        try {
-            const res = await axios.get("http://localhost:5000/api/updates");
-            setUpdates(res.data.updates);
-        } catch (err) { console.error(err); }
+  // -----------------------------
+  // Shelters
+  // -----------------------------
+  const [shelters, setShelters] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // -----------------------------
+  // Community updates
+  // -----------------------------
+  const [modalOpen, setModalOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [file, setFile] = useState(null);
+  const [updates, setUpdates] = useState([]);
+
+  // -----------------------------
+  // Announcements & weather
+  // -----------------------------
+  const [announcements, setAnnouncements] = useState([]);
+  const [weather, setWeather] = useState(null);
+
+  // -----------------------------
+  // Fetch profile
+  // -----------------------------
+  useEffect(() => {
+    if (!emailFromState) return;
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/victim/email/${emailFromState.trim()}`
+        );
+        if (res.data) setProfile(res.data);
+      } catch (err) {
+        console.error("Error fetching profile:", err.response?.data || err.message);
+      } finally {
+        setLoadingProfile(false);
+      }
     };
+    fetchProfile();
+  }, [emailFromState]);
+
+  // -----------------------------
+  // Fetch shelters safely
+  // -----------------------------
+  useEffect(() => {
     const fetchShelters = async () => {
-        try {
-            const res = await axios.get("http://localhost:5000/api/shelters");
-            setShelters(res.data);
-        } catch (err) { console.error(err); }
+      try {
+        const res = await axios.get("http://localhost:5000/api/shelters");
+        // sanitize location to avoid undefined crash
+        const sanitizedShelters = (res.data || []).map((s) => ({
+          ...s,
+          location: s.location || "Unknown",
+        }));
+        setShelters(sanitizedShelters);
+      } catch (err) {
+        console.error("Error fetching shelters:", err);
+      }
     };
+    fetchShelters();
+  }, []);
 
-    // Community Updates
-    const handleSubmitUpdate = async (e) => {
-        e.preventDefault();
-        try {
-            const formData = new FormData();
-            formData.append("author", email || "Anonymous");
-            formData.append("text", text);
-            if (file) formData.append("media", file);
+  // Filter shelters by search term (safe)
+  const filteredShelters = shelters.filter(
+    (s) =>
+      s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.location?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-            await axios.post("http://localhost:5000/api/updates", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
+  const emergencyNumbers = ["+8801840268794", "+8801531982970", "+8801580602149"];
 
-            setText(""); setFile(null); setModalOpen(false); fetchUpdates();
-        } catch (err) { console.error(err); }
+  // -----------------------------
+  // Fetch announcements & weather
+  // -----------------------------
+  useEffect(() => {
+    const fetchAnnouncementsWeather = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/announcements");
+        setAnnouncements(res.data.news || []);
+        setWeather(res.data.weather || null);
+      } catch (err) {
+        console.error(err);
+      }
     };
+    fetchAnnouncementsWeather();
+  }, []);
 
-    // Shelters
-    const addShelter = async () => {
-        if (!newShelter.name || !newShelter.location || newShelter.capacity <= 0) return;
-        try {
-            const res = await axios.post("http://localhost:5000/api/shelters", {
-                ...newShelter, currentOccupancy: 0, needsHelp: false
-            });
-            setShelters([...shelters, res.data]);
-            setNewShelter({ name: "", location: "", capacity: 0 });
-        } catch (err) { console.error(err); }
-    };
-    const updateOccupancy = async (id, change) => {
-        const shelter = shelters.find(s => s._id === id);
-        try {
-            const updated = await axios.put(`http://localhost:5000/api/shelters/${id}`, {
-                currentOccupancy: shelter.currentOccupancy + change,
-                needsHelp: shelter.currentOccupancy + change >= shelter.capacity,
-            });
-            setShelters(shelters.map(s => s._id === id ? updated.data : s));
-        } catch (err) { console.error(err); }
-    };
+  // -----------------------------
+  // Handle profile picture update
+  // -----------------------------
+  const handleProfilePicChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile || !profile) return;
 
-    return (
-        <div className="container-victdash">
-            <h2 className="title-victdash">Victim Dashboard</h2>
-            <p className="welcome-text-victdash">Welcome, {email}</p>
+    const formData = new FormData();
+    formData.append("profilePic", selectedFile);
 
-            <div className="content-victdash">
+    try {
+      const res = await axios.put(
+        `http://localhost:5000/api/victim/profile-pic/${profile._id}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      setProfile(res.data); // update profile immediately
+    } catch (err) {
+      console.error("Profile picture update failed:", err.response?.data || err.message);
+    }
+  };
 
-                {/* ---------------- Help Request Component ---------------- */}
-                <HelpRequest email={email} phone={phone} />
+  if (loadingProfile) return <p>Loading profile...</p>;
+  if (!profile) return <p>Profile not found!</p>;
 
-                {/* ---------------- SOS ---------------- */}
-                <div className="sos-box-victdash">
-                    <h3>Emergency SOS</h3>
-                    <SOSButton phoneNumber={phone} />
-                </div>
-
-                {/* ---------------- Donations ---------------- */}
-                <div className="donation-box-victdash">
-                    <h3>Make a Donation</h3>
-                    <button onClick={() => navigate('/donations/fund')}>Donate Funds</button>
-                    <button onClick={() => navigate('/donations/material')}>Donate Materials</button>
-                </div>
-
-                {/* ---------------- Donation History ---------------- */}
-                {/* <div className="donation-history-box-victdash">
-                    <h3>Your Donation History</h3>
-                    {donationHistory.length === 0 ? (<p>No donations found.</p>) :
-                        (<ul>{donationHistory.map((d, idx) => (
-                            <li key={idx}>
-                                {d.type === 'fund' ? `Fund Donation: $${d.amount} - ${new Date(d.date).toLocaleDateString()}` :
-                                    `Material Donation: ${d.materialType} (Qty: ${d.quantity}) - ${new Date(d.date).toLocaleDateString()}` }
-                            </li>
-                        ))}</ul>)
-                    }
-                </div> */}
-
-                {/* ---------------- Shelters ---------------- */}
-                <div className="shelter-section-victdash">
-                    <h3>Nearest Shelters</h3>
-                    <div className="add-shelter-box">
-                        <input type="text" placeholder="Shelter Name" value={newShelter.name} onChange={e => setNewShelter({...newShelter, name: e.target.value})} />
-                        <input type="text" placeholder="Location" value={newShelter.location} onChange={e => setNewShelter({...newShelter, location: e.target.value})} />
-                        <input type="number" placeholder="Capacity" value={newShelter.capacity} onChange={e => setNewShelter({...newShelter, capacity: parseInt(e.target.value)})} />
-                        <button onClick={addShelter}>Add Shelter</button>
-                    </div>
-                    {shelters.map(s => <ShelterCard key={s._id} shelter={s} onAdd={id => updateOccupancy(id, 1)} onRemove={id => updateOccupancy(id, -1)} />)}
-                </div>
-
-                {/* ---------------- Community Updates ---------------- */}
-                <div className="updates-section-victdash">
-                    <h3>Community Updates</h3>
-                    <button onClick={() => setModalOpen(true)}>Share Update</button>
-                    <div className="updates-feed">
-                        {updates.map(u => (
-                            <div key={u._id} className="update-card">
-                                <p><strong>{u.author}</strong>: {u.text}</p>
-                                {u.media && (u.media.endsWith(".mp4") ?
-                                    <video width="250" controls><source src={`http://localhost:5000${u.media}`} type="video/mp4" /></video> :
-                                    <img src={`http://localhost:5000${u.media}`} width="250" alt="media" />
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} className="modal" overlayClassName="overlay">
-                <h2>Share Update</h2>
-                <form onSubmit={handleSubmitUpdate}>
-                    <textarea placeholder="Write something..." value={text} onChange={e => setText(e.target.value)} required />
-                    <input type="file" accept="image/*,video/*" onChange={e => setFile(e.target.files[0])} />
-                    <button type="submit">Post</button>
-                </form>
-                <button onClick={() => setModalOpen(false)}>Close</button>
-            </Modal>
+  return (
+    <div className="container-victdash">
+      {/* Profile & Logout */}
+      <div className="profile-corner">
+        <img
+          src={
+            profile.profilePic
+              ? `http://localhost:5000/uploads/${profile.profilePic}`
+              : "/default-profile.png"
+          }
+          alt="Profile"
+          style={{ cursor: "pointer" }}
+          onClick={() => fileInputRef.current.click()}
+        />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleProfilePicChange}
+        />
+        <div className="profile-info">
+          <p><strong>{profile.name}</strong></p>
+          <p>Email: {profile.email}</p>
+          <p>Phone: {profile.phone}</p>
+          <p>Location: {profile.location}</p>
+          <button onClick={() => navigate("/login")}>Logout</button>
         </div>
-    );
+      </div>
+
+      <div className="dashboard-content">
+        <h2>Victim Dashboard</h2>
+
+        {/* Emergency Section */}
+        <div className="glass-section">
+          <h3>Emergency SOS</h3>
+          <SOSButton numbers={emergencyNumbers} />
+        </div>
+
+        {/* Community Chat */}
+        <div className="glass-section">
+          <h2>Community Chat</h2>
+          <CommunityChat
+            userName={profile.name}
+            userEmail={profile.email}
+            userPhone={profile.phone}
+            userLocation={profile.location}
+          />
+        </div>
+
+        {/* Shelters */}
+        <div className="glass-section">
+          <h2>Nearby Shelters</h2>
+          <input
+            type="text"
+            placeholder="Search shelters by name or location..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {filteredShelters.length === 0 ? (
+            <p>No shelters found.</p>
+          ) : (
+            <ul>
+              {filteredShelters.map((s) => (
+                <li key={s._id}>
+                  <p><strong>{s.name}</strong></p>
+                  <p>Location: {s.location}</p>
+                  <p>Capacity: {s.totalCapacity}, Current Occupancy: {s.currentOccupancy}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Announcements & Weather */}
+        <div className="glass-section">
+          <h2>Important Announcements & Weather</h2>
+          <div className="announcements">
+            {announcements.length === 0 ? (
+              <p>No announcements yet.</p>
+            ) : (
+              announcements.map((n) => (
+                <div key={n._id} className="announcement-item">
+                  <strong>{n.title}</strong>
+                  <p>{n.description}</p>
+                </div>
+              ))
+            )}
+          </div>
+          {weather && (
+            <div className="weather-box">
+              <h4>Weather Update</h4>
+              <p>City: {weather.location}</p>
+              <p>Temperature: {weather.temperature}°C</p>
+              <p>Condition: {weather.condition}</p>
+              <p>Wind Speed: {weather.windSpeed} m/s</p>
+              <p>Rain Forecast: {weather.rainForecast} mm</p>
+              <p>Alert: {weather.alert || "None"}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Community Updates */}
+        <div className="glass-section">
+          <CommunityUpdates user={{ email: profile.email, token: tokenFromState }} />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default VictimDashboard;

@@ -1,161 +1,208 @@
-/* src/styles/victimdashboard.css */
+/* victimdashboard.css */
 
-/* Background & Container */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: url("/background.jpeg") no-repeat center center fixed;
-    background-size: cover;
-}
-
+/* Body & Dashboard Layout */
 .container-victdash {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    background-color: rgba(245, 240, 255, 0.9); /* light violet background */
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  padding: 20px;
+  position: relative;
 }
 
-/* Title */
-.title-victdash {
-    text-align: center;
-    color: hwb(274 2% 82%); /* dark violet */
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+/* Glassy effect sections */
+.glass-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  padding: 25px;
+  margin: 20px 0;
+  width: 90%;
+  max-width: 900px;
+  transition: all 0.3s ease;
 }
 
-.welcome-text-victdash {
-    text-align: center;
-    color: #4b0082; /* dark violet */
-    margin-bottom: 30px;
-    font-size: 1.2rem;
+/* Headings */
+h1, h2, h3 {
+  color: #fff;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+  margin-bottom: 15px;
 }
 
-/* Content Layout */
+/* Profile section */
+.profile-section {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.profile-section p {
+  margin: 3px 0;
+  font-size: 0.9rem;
+}
+
+/* Dashboard content wrapper */
 .content-victdash {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 130px; /* profile section er jonno */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Boxes */
-.form-box-victdash,
-.sos-box-victdash,
-.donation-box-victdash,
-.donation-history-box-victdash,
-.updates-section-victdash {
-    flex: 1 1 45%;
-    background-color: #f0e6ff; /* very light violet */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    color: #4b0082; /* dark violet text */
+/* Section cards */
+.sos-box-victdash, .donation-box-victdash, .shelter-section-victdash, .updates-section-victdash, .chat-section-victdash {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+  padding: 20px;
+  margin: 20px 0;
+  width: 90%;
+  max-width: 900px;
 }
 
-/* Form Styling */
-.form-box-victdash select,
-.form-box-victdash textarea,
-.updates-section-victdash textarea,
-.updates-section-victdash input[type="file"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: 1px solid #d0c4f7;
-    box-sizing: border-box;
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+li {
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border-left: 5px solid #00ffff;
+  transition: all 0.3s ease;
+}
+
+li:hover {
+  background: rgba(0,255,255,0.1);
+  transform: translateX(3px);
 }
 
 /* Buttons */
-/* Buttons */
-.form-box-victdash button,
-.donation-box-victdash button,
-.updates-section-victdash button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #b19cd9; /* light violet */
-    color: #4b0082; /* dark violet text */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+button {
+  background: rgba(0,255,255,0.3);
+  border: none;
+  padding: 10px 22px;
+  margin: 5px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-.form-box-victdash button:hover,
-.donation-box-victdash button:hover,
-.updates-section-victdash button:hover {
-    background-color: #9b88c2; /* darker shade on hover */
-    color: #4b0082; /* text remains dark violet */
+button:hover {
+  background: rgba(0,255,255,0.6);
+  transform: translateY(-2px);
 }
 
-/* Donation History */
-.donation-history-box-victdash ul {
-    list-style: none;
-    padding-left: 0;
+/* Inputs */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
 }
 
-.donation-history-box-victdash li {
-    padding: 8px 0;
-    border-bottom: 1px solid #dcd0f5;
+/* Donation history */
+.donation-history-box-victdash ul li {
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  font-size: 0.95rem;
 }
 
-/* Community Updates */
-.updates-feed {
-    margin-top: 15px;
-}
-
-.update-card {
-    background-color: #e6e0ff; /* light violet card */
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    color: #4b0082; /* dark violet text */
-}
-
-.update-card img,
-.update-card video {
-    margin-top: 8px;
-    max-width: 100%;
-    border-radius: 6px;
-}
-
-/* Modal Styling */
+/* Modal */
 .modal {
-    background-color: #fff0ff; /* very light violet */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    margin: auto;
-    color: #4b0082; /* dark violet text */
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: auto;
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: rgba(0,0,0,0.6);
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .content-victdash {
-        flex-direction: column;
-    }
+/* Media responsiveness */
+@media (max-width: 1024px) {
+  .glass-section, .sos-box-victdash, .donation-box-victdash, .shelter-section-victdash, .updates-section-victdash, .chat-section-victdash {
+    width: 95%;
+    padding: 20px;
+  }
+}
 
-    .form-box-victdash,
-    .sos-box-victdash,
-    .donation-box-victdash,
-    .donation-history-box-victdash,
-    .updates-section-victdash {
-        flex: 1 1 100%;
-    }
+@media (max-width: 768px) {
+  .content-victdash {
+    margin-top: 150px;
+  }
+
+  .profile-section {
+    top: 10px;
+    right: 10px;
+    padding: 12px;
+  }
+
+  li {
+    padding: 10px;
+  }
+
+  input, textarea {
+    padding: 10px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-section, .sos-box-victdash, .donation-box-victdash, .shelter-section-victdash, .updates-section-victdash, .chat-section-victdash {
+    width: 98%;
+    padding: 15px;
+  }
+
+  .profile-section {
+    top: 5px;
+    right: 5px;
+    padding: 10px;
+  }
+
+  .content-victdash {
+    margin-top: 160px;
+  }
+
+  li, input, textarea, button {
+    font-size: 0.85rem;
+    padding: 7px 14px;
+  }
 }
