@@ -1,0 +1,88 @@
+/* src/views/RegisterVictim.css */
+
+.container-regvic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 70px;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #667eea 0%, #4b286d 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
+    gap: 20px;
+    opacity: 0.8;
+}
+
+.title-regvic {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    color: black;
+    user-select: none;
+    text-align: center;
+}
+
+.input-regvic {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1rem;
+    outline: none;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    user-select: text;
+    color: #333;
+}
+
+.input-regvic::placeholder {
+    color: #b38894;
+}
+
+.input-regvic:focus {
+    box-shadow: 0 0 14px 4px #ff6a88;
+    background-color: #ffe5e9;
+    color: #222;
+}
+
+.button-regvic {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-color: #fff;
+    color: #3e08c9;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(94, 116, 255, 0.5);
+    transition: all 0.35s ease;
+    user-select: none;
+    letter-spacing: 1px;
+}
+
+.button-regvic:hover {
+    background-color: #00ffbf;
+    color: #080000;
+    box-shadow: 0 9px 22px rgba(154, 218, 255, 0.85);
+    transform: translateY(-4px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .container-regvic {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .title-regvic {
+        font-size: 2rem;
+        padding-bottom: 10px;
+    }
+}

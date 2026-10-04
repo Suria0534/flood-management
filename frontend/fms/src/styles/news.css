@@ -1,0 +1,16 @@
+.news-container {
+    padding: 20px;
+}
+.news-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.news-card h3 {
+    margin: 0 0 10px 0;
+}
+.news-card p {
+    margin: 0 0 5px 0;
+}

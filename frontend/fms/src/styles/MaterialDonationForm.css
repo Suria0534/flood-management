@@ -1,0 +1,52 @@
+.material-donation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* middle এ আনবে */
+  justify-content: center;
+  min-height: 80vh;
+  background-color: #1a1a1a; /* dark background */
+  color: #fff; /* হেডিং এবং লেখা সাদা হবে */
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.material-donation-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.material-donation-container form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.material-donation-container input {
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+}
+
+.material-donation-container button {
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #8a2be2; /* light violet */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.material-donation-container button:hover {
+  background-color: #5a189a;
+}
+
+.material-donation-container p {
+  margin-top: 10px;
+  text-align: center;
+}

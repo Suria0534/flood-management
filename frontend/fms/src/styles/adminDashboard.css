@@ -1,0 +1,131 @@
+.admin-dashboard {
+  min-height: 100vh;
+  padding: 40px;
+  background: url("../assets/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+/* Section Cards (Glass effect) */
+.admin-dashboard section {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+/* Headings */
+.admin-dashboard h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 10px;
+}
+
+/* ================= Table Styles ================= */
+.add-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+.add-form button {
+  grid-column: 1 / -1;
+  padding: 10px;
+  background-color: rgba(75, 134, 245, 0.8);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-form button:hover {
+  background-color: rgba(75, 134, 245, 1);
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.table th {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Delete buttons */
+.btn-delete {
+  padding: 5px 10px;
+  background-color: rgba(244, 67, 54, 0.8);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: rgba(244, 67, 54, 1);
+}
+
+/* Responsive tables/cards */
+@media (max-width: 768px) {
+  .add-form {
+    grid-template-columns: 1fr;
+  }
+
+  .table, .table thead, .table tbody, .table th, .table td, .table tr {
+    display: block;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+}

@@ -1,0 +1,27 @@
+.sos-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sos-button {
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sos-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.sos-status {
+    margin-top: 10px;
+    font-weight: bold;
+    color: darkred;
+}
