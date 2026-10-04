@@ -1,0 +1,197 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:root {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #172033;
+	background: #f4f7fb;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+
+html {
+	min-width: 320px;
+	overflow-x: hidden;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+	max-width: 100%;
+	font: inherit;
+}
+
+img,
+video,
+canvas,
+svg {
+	max-width: 100%;
+}
+
+img,
+video {
+	height: auto;
+}
+
+table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+#root {
+	min-height: 100vh;
+	width: 100%;
+}
+
+@media (max-width: 1024px) {
+	.navbar {
+		padding: 14px 24px;
+	}
+
+	.navbar-links {
+		gap: 16px;
+	}
+
+	.hero,
+	.need-help,
+	.resources-hero,
+	.community-hero {
+		min-height: auto;
+		padding: 64px 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.navbar {
+		align-items: flex-start;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.navbar-links {
+		flex: 1 1 100%;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin: 0;
+		padding: 0;
+	}
+
+	.hero,
+	.need-help,
+	.resources-hero,
+	.community-hero,
+	.shelters-hero,
+	.announcements-section {
+		margin-bottom: 32px;
+		padding: 40px 16px;
+	}
+
+	.hero h1,
+	.community-hero h2,
+	.resources-hero h2,
+	.need-help h2 {
+		font-size: clamp(1.8rem, 7vw, 2.5rem);
+	}
+
+	.hero p,
+	.resources-hero p,
+	.community-hero p {
+		font-size: 1rem;
+	}
+
+	.hero-buttons,
+	.admin-login,
+	.resource-form {
+		width: 100%;
+	}
+
+	.hero-buttons button,
+	.admin-btn,
+	.resource-form button,
+	.resource-form input {
+		flex: 1 1 100%;
+		width: 100%;
+	}
+
+	.container-regvic,
+	.container-login {
+		width: calc(100% - 32px);
+		max-width: 540px;
+		margin: 24px auto;
+		padding: 32px 20px;
+	}
+
+	.community-page,
+	.update-form {
+		padding: 24px 16px;
+	}
+
+	.announcements-card {
+		width: min(100%, 400px);
+	}
+}
+
+@media (max-width: 480px) {
+	.navbar {
+		padding: 12px 16px;
+	}
+
+	.navbar-logo {
+		font-size: 18px;
+	}
+
+	.navbar-links {
+		gap: 10px 14px;
+	}
+
+	.navbar-links li a {
+		font-size: 14px;
+	}
+
+	.hero,
+	.need-help,
+	.resources-hero,
+	.community-hero,
+	.shelters-hero,
+	.announcements-section {
+		padding: 28px 12px;
+	}
+
+	.need-help-card,
+	.resources-hero-card,
+	.community-hero-card,
+	.shelters-hero-card,
+	.announcements-card {
+		width: 100%;
+		padding: 32px 20px;
+	}
+
+	.need-help-icon,
+	.resources-hero-icon,
+	.community-hero-icon {
+		font-size: 56px;
+	}
+
+	.container-regvic,
+	.container-login {
+		width: calc(100% - 20px);
+		padding: 24px 16px;
+	}
+
+	.title-regvic,
+	.title-login {
+		font-size: 1.6rem;
+	}
+}
