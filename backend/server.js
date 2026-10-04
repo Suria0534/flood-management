@@ -151,6 +151,11 @@ app.use(express.json());
 
 // Static uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.get("/", (req, res) => res.json({
+  name: "Flood Management API",
+  status: "ok",
+  health: "/health",
+}));
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
 // Routes with fixed paths
