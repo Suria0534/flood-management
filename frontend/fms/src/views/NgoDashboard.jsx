@@ -444,7 +444,7 @@ import SOSButton from "../views/SOSButton";
 import Modal from "react-modal";
 import CommunityUpdates from "../views/CommunityUpdates";
 import CommunityChat from "../views/CommunityChat";
-import "../styles/ngoDashboard.css";
+import "../styles/ngodashboard.css";
 
 Modal.setAppElement("#root");
 
